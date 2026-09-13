@@ -1,0 +1,6 @@
+{
+  "name": "MYRAA AI ASSISTANT",
+  "description": "Native Android AI assistant for Piyush featuring voice, phone control, Gemini intelligence, memory, and privacy dashboard.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

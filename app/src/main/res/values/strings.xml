@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MYRAA</string>
+    <string name="assistant_title">MYRAA AI ASSISTANT</string>
+    <string name="accessibility_service_description">MYRAA uses accessibility to help Piyush interact with apps, click buttons, and navigate the phone upon explicit command.</string>
+</resources>
