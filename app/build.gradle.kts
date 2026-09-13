@@ -25,11 +25,20 @@ android {
 
   signingConfigs {
     create("release") {
-      val keystorePath = System.getenv("KEYSTORE_PATH") ?: "${rootDir}/my-upload-key.jks"
-      storeFile = file(keystorePath)
-      storePassword = System.getenv("STORE_PASSWORD")
-      keyAlias = "upload"
-      keyPassword = System.getenv("KEY_PASSWORD")
+      val keystorePath = System.getenv("KEYSTORE_PATH")
+      val customKeystore = if (keystorePath != null) file(keystorePath) else file("${rootDir}/my-upload-key.jks")
+      if (customKeystore.exists()) {
+        storeFile = customKeystore
+        storePassword = System.getenv("STORE_PASSWORD")
+        keyAlias = System.getenv("KEY_ALIAS") ?: "upload"
+        keyPassword = System.getenv("KEY_PASSWORD")
+      } else {
+        // Fallback to debug.keystore for CI/local builds when release keystore is not provided
+        storeFile = file("${rootDir}/debug.keystore")
+        storePassword = "android"
+        keyAlias = "androiddebugkey"
+        keyPassword = "android"
+      }
     }
     create("debugConfig") {
       storeFile = file("${rootDir}/debug.keystore")
@@ -137,4 +146,12 @@ dependencies {
   debugImplementation(libs.androidx.compose.ui.tooling)
   "ksp"(libs.androidx.room.compiler)
   "ksp"(libs.moshi.kotlin.codegen)
+}
+
+// Disable unnecessary KSP processing on unit tests and instrumentation tests.
+// Only production code (main/debug/release) requires Room and Moshi annotation processing.
+tasks.matching {
+  it.name.startsWith("ksp") && (it.name.contains("UnitTest") || it.name.contains("AndroidTest"))
+}.configureEach {
+  enabled = false
 }

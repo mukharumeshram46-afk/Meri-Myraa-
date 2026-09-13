@@ -20,10 +20,10 @@ object ActionRegistry {
         val text = input.trim().lowercase()
 
         // Flashlight
-        if (text.contains("flashlight on") || text.contains("torch on") || text.contains("flashlight chalu") || text.contains("torch jalao")) {
+        if (text.contains("flashlight on") || text.contains("torch on") || text.contains("flashlight chalu") || text.contains("torch jalao") || text.contains("torch chalu")) {
             return AssistantAction.ToggleFlashlight(true)
         }
-        if (text.contains("flashlight off") || text.contains("torch off") || text.contains("flashlight band") || text.contains("torch bujhao")) {
+        if (text.contains("flashlight off") || text.contains("torch off") || text.contains("flashlight band") || text.contains("torch bujhao") || text.contains("torch band")) {
             return AssistantAction.ToggleFlashlight(false)
         }
 

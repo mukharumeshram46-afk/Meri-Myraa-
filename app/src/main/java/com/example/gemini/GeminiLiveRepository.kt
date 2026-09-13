@@ -23,50 +23,50 @@ import java.util.concurrent.TimeUnit
 // Moshi Models for Gemini API
 @JsonClass(generateAdapter = true)
 data class GeminiPart(
-    @Json(name = "text") val text: String? = null,
-    @Json(name = "inline_data") val inlineData: GeminiInlineData? = null
+    @param:Json(name = "text") val text: String? = null,
+    @param:Json(name = "inline_data") val inlineData: GeminiInlineData? = null
 )
 
 @JsonClass(generateAdapter = true)
 data class GeminiInlineData(
-    @Json(name = "mime_type") val mimeType: String,
-    @Json(name = "data") val data: String
+    @param:Json(name = "mime_type") val mimeType: String,
+    @param:Json(name = "data") val data: String
 )
 
 @JsonClass(generateAdapter = true)
 data class GeminiContent(
-    @Json(name = "parts") val parts: List<GeminiPart>,
-    @Json(name = "role") val role: String? = "user"
+    @param:Json(name = "parts") val parts: List<GeminiPart>,
+    @param:Json(name = "role") val role: String? = "user"
 )
 
 @JsonClass(generateAdapter = true)
 data class GeminiSystemInstruction(
-    @Json(name = "parts") val parts: List<GeminiPart>
+    @param:Json(name = "parts") val parts: List<GeminiPart>
 )
 
 @JsonClass(generateAdapter = true)
 data class GeminiGenerationConfig(
-    @Json(name = "temperature") val temperature: Float? = 0.7f,
-    @Json(name = "topP") val topP: Float? = 0.95f,
-    @Json(name = "topK") val topK: Int? = 40,
-    @Json(name = "maxOutputTokens") val maxOutputTokens: Int? = 1000
+    @param:Json(name = "temperature") val temperature: Float? = 0.7f,
+    @param:Json(name = "topP") val topP: Float? = 0.95f,
+    @param:Json(name = "topK") val topK: Int? = 40,
+    @param:Json(name = "maxOutputTokens") val maxOutputTokens: Int? = 1000
 )
 
 @JsonClass(generateAdapter = true)
 data class GeminiGenerateRequest(
-    @Json(name = "contents") val contents: List<GeminiContent>,
-    @Json(name = "system_instruction") val systemInstruction: GeminiSystemInstruction? = null,
-    @Json(name = "generationConfig") val generationConfig: GeminiGenerationConfig? = null
+    @param:Json(name = "contents") val contents: List<GeminiContent>,
+    @param:Json(name = "system_instruction") val systemInstruction: GeminiSystemInstruction? = null,
+    @param:Json(name = "generationConfig") val generationConfig: GeminiGenerationConfig? = null
 )
 
 @JsonClass(generateAdapter = true)
 data class GeminiCandidate(
-    @Json(name = "content") val content: GeminiContent?
+    @param:Json(name = "content") val content: GeminiContent?
 )
 
 @JsonClass(generateAdapter = true)
 data class GeminiGenerateResponse(
-    @Json(name = "candidates") val candidates: List<GeminiCandidate>?
+    @param:Json(name = "candidates") val candidates: List<GeminiCandidate>?
 )
 
 interface GeminiApiService {
